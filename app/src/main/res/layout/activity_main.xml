@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="24dp"
-        android:clickable="true" />
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add" />
 
 
 </FrameLayout>
