@@ -1,8 +1,10 @@
 package com.ito.masaharu.konndokososeikousaseru
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
@@ -21,8 +23,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         fab.setOnClickListener {
-            Toast.makeText(applicationContext, "追加！", Toast.LENGTH_SHORT).show()
+            // 起動する対象をクラスオブジェクトで指定する
+            val intent = Intent(this, PostActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(applicationContext, "メモに内容を入力！", Toast.LENGTH_SHORT).show()
         }
+
+
+
 
         val memoList = readAll()
 
@@ -39,10 +47,12 @@ class MainActivity : AppCompatActivity() {
                     delete(item.id)
                 }
             }, true)
-
+        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(itemDecoration)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
 
     }
 
@@ -103,5 +113,6 @@ class MainActivity : AppCompatActivity() {
             realm.deleteAll()
         }
     }
+
 
 }
